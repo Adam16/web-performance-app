@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+
+  --color-primary: #0F172A;
+  --color-background-light: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-text-main: #1E293B;
+  --color-muted: #64748B;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-critical: #E11D48;
+  --color-border-color: #E2E8F0;
+}
+
+body {
+  @apply bg-background-light text-text-main antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  @apply font-display;
+}

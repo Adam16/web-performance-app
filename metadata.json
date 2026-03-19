@@ -1,0 +1,5 @@
+{
+  "name": "Executive Clarity Performance Dashboard",
+  "description": "A professional performance monitoring dashboard for tracking web vitals, payload sizes, and deployment health.",
+  "requestFramePermissions": []
+}
