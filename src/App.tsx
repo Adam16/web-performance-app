@@ -9,6 +9,8 @@ import { GlobalOverview } from './components/GlobalOverview';
 import { BudgetEnforcer } from './components/BudgetEnforcer';
 import { AssetBreakdown } from './components/AssetBreakdown';
 import { TrendAnalysis } from './components/TrendAnalysis';
+import { CoreWebVitals } from './components/CoreWebVitals';
+import { LighthouseReport } from './components/LighthouseReport';
 import { Screen } from './types';
 
 export default function App() {
@@ -20,6 +22,8 @@ export default function App() {
       case 'budget': return <BudgetEnforcer />;
       case 'assets': return <AssetBreakdown />;
       case 'trends': return <TrendAnalysis />;
+      case 'vitals': return <CoreWebVitals />;
+      case 'lighthouse': return <LighthouseReport />;
       default: return <GlobalOverview />;
     }
   };

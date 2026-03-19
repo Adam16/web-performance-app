@@ -1,6 +1,6 @@
 import React from 'react';
-import { CheckCircle2, ArrowUpRight, ArrowDownRight, Minus, ArrowRight } from 'lucide-react';
-import { DEPLOYMENTS } from '../constants';
+import { CheckCircle2, ArrowUpRight, ArrowDownRight, Minus, ArrowRight, Zap, Activity, Layout } from 'lucide-react';
+import { DEPLOYMENTS, CORE_WEB_VITALS, LIGHTHOUSE_CATEGORIES } from '../constants';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -10,11 +10,26 @@ function cn(...inputs: ClassValue[]) {
 
 export const GlobalOverview: React.FC = () => {
   const metrics = [
-    { label: 'Largest Contentful Paint', value: '1.2', unit: 's', status: 'success' },
     { label: 'JavaScript Payload', value: '365', unit: 'KB', status: 'critical', sub: '115KB over limit' },
     { label: 'Total Image Size', value: '1.1', unit: 'MB', status: 'warning', sub: 'Nearing 1.2MB limit' },
     { label: 'API Latency (p95)', value: '240', unit: 'ms', status: 'success' },
+    { label: 'Server Response', value: '180', unit: 'ms', status: 'success' },
   ];
+
+  const getScoreColor = (score: number) => {
+    if (score >= 0.9) return 'text-success';
+    if (score >= 0.5) return 'text-warning';
+    return 'text-critical';
+  };
+
+  const getVitalIcon = (id: string) => {
+    switch (id) {
+      case 'lcp': return <Zap className="w-4 h-4" />;
+      case 'inp': return <Activity className="w-4 h-4" />;
+      case 'cls': return <Layout className="w-4 h-4" />;
+      default: return null;
+    }
+  };
 
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -29,6 +44,67 @@ export const GlobalOverview: React.FC = () => {
         <div className="mt-10 flex items-center gap-2 text-success bg-success/10 px-6 py-2 rounded-full text-sm font-bold border border-success/20 shadow-sm">
           <CheckCircle2 className="w-4 h-4" />
           Within Budget Parameters
+        </div>
+      </section>
+
+      {/* Core Web Vitals Summary */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {CORE_WEB_VITALS.map((vital) => (
+          <div key={vital.id} className="bg-surface border border-border-color rounded-2xl p-6 hover:shadow-lg transition-all border-l-4" style={{ borderLeftColor: vital.status === 'Good' ? '#10b981' : vital.status === 'Needs Improvement' ? '#f59e0b' : '#ef4444' }}>
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex items-center gap-2 text-muted">
+                {getVitalIcon(vital.id)}
+                <span className="text-[10px] font-black uppercase tracking-widest">{vital.id}</span>
+              </div>
+              <span className={cn(
+                "text-[10px] font-black uppercase px-2 py-0.5 rounded-full",
+                vital.status === 'Good' ? "bg-success/10 text-success" :
+                vital.status === 'Needs Improvement' ? "bg-warning/10 text-warning" :
+                "bg-critical/10 text-critical"
+              )}>
+                {vital.status}
+              </span>
+            </div>
+            <h3 className="text-sm font-bold text-primary mb-1">{vital.name}</h3>
+            <div className="flex items-baseline gap-1">
+              <span className="text-3xl font-black text-primary">{vital.value}</span>
+              <span className="text-sm font-bold text-muted">{vital.unit}</span>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Lighthouse Summary */}
+      <section className="bg-surface border border-border-color rounded-2xl p-8 shadow-sm">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+          <div>
+            <h3 className="font-display font-bold text-xl text-primary mb-1">Lighthouse Performance</h3>
+            <p className="text-xs text-muted font-medium uppercase tracking-widest">Aggregate scores from latest audit</p>
+          </div>
+          <div className="flex items-center gap-8">
+            {LIGHTHOUSE_CATEGORIES.map((cat) => (
+              <div key={cat.id} className="flex flex-col items-center">
+                <div className={cn("text-2xl font-black mb-1", getScoreColor(cat.score))}>
+                  {Math.round(cat.score * 100)}
+                </div>
+                <div className="text-[9px] font-black uppercase tracking-tighter text-muted">
+                  {cat.title}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="h-1.5 w-full bg-muted/10 rounded-full flex overflow-hidden">
+          {LIGHTHOUSE_CATEGORIES.map((cat) => (
+            <div 
+              key={cat.id}
+              className={cn(
+                "h-full transition-all duration-1000",
+                cat.score >= 0.9 ? "bg-success" : cat.score >= 0.5 ? "bg-warning" : "bg-critical"
+              )}
+              style={{ width: '25%' }}
+            />
+          ))}
         </div>
       </section>
 

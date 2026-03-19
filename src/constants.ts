@@ -1,4 +1,52 @@
-import { Asset, Deployment, TrendData } from './types';
+import { Asset, Deployment, TrendData, CoreWebVital, LighthouseCategory, LighthouseAudit } from './types';
+
+export const LIGHTHOUSE_CATEGORIES: LighthouseCategory[] = [
+  { id: 'performance', title: 'Performance', score: 0.92, description: 'Measures how quickly the page loads and becomes interactive.' },
+  { id: 'accessibility', title: 'Accessibility', score: 0.98, description: 'Measures how accessible the page is to users with disabilities.' },
+  { id: 'best-practices', title: 'Best Practices', score: 1.0, description: 'Measures adherence to web development best practices.' },
+  { id: 'seo', title: 'SEO', score: 0.91, description: 'Measures how well the page is optimized for search engines.' },
+];
+
+export const LIGHTHOUSE_AUDITS: LighthouseAudit[] = [
+  { id: 'first-contentful-paint', title: 'First Contentful Paint', score: 0.95, displayValue: '1.2 s', category: 'performance', description: 'First Contentful Paint marks the time at which the first text or image is painted.' },
+  { id: 'speed-index', title: 'Speed Index', score: 0.88, displayValue: '1.8 s', category: 'performance', description: 'Speed Index shows how quickly the contents of a page are visibly populated.' },
+  { id: 'largest-contentful-paint', title: 'Largest Contentful Paint', score: 0.92, displayValue: '2.1 s', category: 'performance', description: 'Largest Contentful Paint marks the time at which the largest text or image is painted.' },
+  { id: 'total-blocking-time', title: 'Total Blocking Time', score: 0.98, displayValue: '120 ms', category: 'performance', description: 'Sum of all time periods between FCP and Time to Interactive where task length exceeded 50ms.' },
+  { id: 'cumulative-layout-shift', title: 'Cumulative Layout Shift', score: 0.85, displayValue: '0.12', category: 'performance', description: 'Cumulative Layout Shift measures the movement of visible elements within the viewport.' },
+  { id: 'aria-allowed-attr', title: 'ARIA attributes are allowed for an element\'s role', score: 1.0, category: 'accessibility', description: 'Each ARIA `role` supports a specific subset of `aria-*` attributes.' },
+  { id: 'color-contrast', title: 'Background and foreground colors have a sufficient contrast ratio', score: 0.95, category: 'accessibility', description: 'Low-contrast text is difficult or impossible for many users to read.' },
+  { id: 'image-alt', title: 'Image elements have [alt] attributes', score: 1.0, category: 'accessibility', description: 'Informative elements should aim for short, descriptive alternate text.' },
+];
+
+export const CORE_WEB_VITALS: CoreWebVital[] = [
+  {
+    id: 'lcp',
+    name: 'Largest Contentful Paint',
+    value: 2.1,
+    unit: 's',
+    status: 'Good',
+    thresholds: { good: 2.5, poor: 4.0 },
+    description: 'Measures loading performance. To provide a good user experience, LCP should occur within 2.5 seconds of when the page first starts loading.'
+  },
+  {
+    id: 'inp',
+    name: 'Interaction to Next Paint',
+    value: 180,
+    unit: 'ms',
+    status: 'Good',
+    thresholds: { good: 200, poor: 500 },
+    description: 'Measures responsiveness. To provide a good user experience, pages should have an INP of 200 milliseconds or less.'
+  },
+  {
+    id: 'cls',
+    name: 'Cumulative Layout Shift',
+    value: 0.12,
+    unit: '',
+    status: 'Needs Improvement',
+    thresholds: { good: 0.1, poor: 0.25 },
+    description: 'Measures visual stability. To provide a good user experience, pages should maintain a CLS of 0.1. or less.'
+  }
+];
 
 export const DEPLOYMENTS: Deployment[] = [
   { id: '#a9f2b4c', time: '10 mins ago', trigger: 'Merge pull request #142', payloadDelta: 115, status: 'Breached' },
