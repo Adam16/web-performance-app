@@ -16,15 +16,15 @@ export const ASSETS: Asset[] = [
 ];
 
 export const TREND_DATA: TrendData[] = [
-  { date: 'Oct 01', value: 0.6 },
-  { date: 'Oct 04', value: 0.7 },
-  { date: 'Oct 08', value: 0.8 },
-  { date: 'Oct 12', value: 0.75 },
-  { date: 'Oct 15', value: 0.9 },
-  { date: 'Oct 18', value: 1.2 },
-  { date: 'Oct 22', value: 1.1 },
-  { date: 'Oct 25', value: 1.45 },
-  { date: 'Oct 29', value: 1.2 },
-  { date: 'Nov 02', value: 1.15 },
-  { date: 'Nov 05', value: 1.1 },
+  { date: 'Oct 01', total: 0.6, js: 180, css: 40, image: 400, tbt: 150 },
+  { date: 'Oct 04', total: 0.7, js: 200, css: 45, image: 450, tbt: 180 },
+  { date: 'Oct 08', total: 0.8, js: 220, css: 50, image: 550, tbt: 200 },
+  { date: 'Oct 12', total: 0.75, js: 210, css: 48, image: 500, tbt: 190 },
+  { date: 'Oct 15', total: 0.9, js: 240, css: 55, image: 600, tbt: 220 },
+  { date: 'Oct 18', total: 1.2, js: 300, css: 70, image: 800, tbt: 350 },
+  { date: 'Oct 22', total: 1.1, js: 280, css: 65, image: 750, tbt: 300 },
+  { date: 'Oct 25', total: 1.45, js: 365, css: 85, image: 1000, tbt: 450 },
+  { date: 'Oct 29', total: 1.2, js: 320, css: 75, image: 800, tbt: 380 },
+  { date: 'Nov 02', total: 1.15, js: 310, css: 72, image: 780, tbt: 360 },
+  { date: 'Nov 05', total: 1.1, js: 300, css: 70, image: 750, tbt: 340 },
 ];

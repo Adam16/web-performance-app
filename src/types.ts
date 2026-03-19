@@ -15,7 +15,13 @@ export interface Asset {
 
 export interface TrendData {
   date: string;
-  value: number;
+  total: number;
+  js: number;
+  css: number;
+  image: number;
+  tbt: number;
 }
+
+export type MetricType = 'total' | 'js' | 'css' | 'image' | 'tbt';
 
 export type Screen = 'overview' | 'budget' | 'assets' | 'trends';
