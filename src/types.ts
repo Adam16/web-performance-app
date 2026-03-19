@@ -24,7 +24,19 @@ export interface TrendData {
 
 export type MetricType = 'total' | 'js' | 'css' | 'image' | 'tbt';
 
-export type Screen = 'overview' | 'budget' | 'assets' | 'trends' | 'vitals' | 'lighthouse';
+export type Screen = 'overview' | 'budget' | 'assets' | 'trends' | 'vitals' | 'lighthouse' | 'pages';
+
+export interface PagePerformance {
+  id: string;
+  name: string;
+  path: string;
+  score: number;
+  lcp: string;
+  cls: number;
+  inp: string;
+  jsSize: string;
+  status: 'Good' | 'Needs Improvement' | 'Poor';
+}
 
 export interface LighthouseCategory {
   id: string;

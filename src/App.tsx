@@ -11,6 +11,7 @@ import { AssetBreakdown } from './components/AssetBreakdown';
 import { TrendAnalysis } from './components/TrendAnalysis';
 import { CoreWebVitals } from './components/CoreWebVitals';
 import { LighthouseReport } from './components/LighthouseReport';
+import { KeyPagesPerformance } from './components/KeyPagesPerformance';
 import { Screen } from './types';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
   const renderScreen = () => {
     switch (activeScreen) {
       case 'overview': return <GlobalOverview />;
+      case 'pages': return <KeyPagesPerformance />;
       case 'budget': return <BudgetEnforcer />;
       case 'assets': return <AssetBreakdown />;
       case 'trends': return <TrendAnalysis />;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle2, ArrowUpRight, ArrowDownRight, Minus, ArrowRight, Zap, Activity, Layout } from 'lucide-react';
-import { DEPLOYMENTS, CORE_WEB_VITALS, LIGHTHOUSE_CATEGORIES } from '../constants';
+import { DEPLOYMENTS, CORE_WEB_VITALS, LIGHTHOUSE_CATEGORIES, KEY_PAGES } from '../constants';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -17,8 +17,8 @@ export const GlobalOverview: React.FC = () => {
   ];
 
   const getScoreColor = (score: number) => {
-    if (score >= 0.9) return 'text-success';
-    if (score >= 0.5) return 'text-warning';
+    if (score >= 90) return 'text-success';
+    if (score >= 80) return 'text-warning';
     return 'text-critical';
   };
 
@@ -84,7 +84,7 @@ export const GlobalOverview: React.FC = () => {
           <div className="flex items-center gap-8">
             {LIGHTHOUSE_CATEGORIES.map((cat) => (
               <div key={cat.id} className="flex flex-col items-center">
-                <div className={cn("text-2xl font-black mb-1", getScoreColor(cat.score))}>
+                <div className={cn("text-2xl font-black mb-1", getScoreColor(cat.score * 100))}>
                   {Math.round(cat.score * 100)}
                 </div>
                 <div className="text-[9px] font-black uppercase tracking-tighter text-muted">
@@ -105,6 +105,53 @@ export const GlobalOverview: React.FC = () => {
               style={{ width: '25%' }}
             />
           ))}
+        </div>
+      </section>
+
+      {/* Key Pages Summary */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-surface border border-border-color rounded-2xl p-8 shadow-sm">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="font-display font-bold text-xl text-primary">Key Pages</h3>
+            <span className="text-[10px] font-black uppercase tracking-widest text-muted">Performance Score</span>
+          </div>
+          <div className="space-y-4">
+            {KEY_PAGES.map((page) => (
+              <div key={page.id} className="flex items-center justify-between group cursor-pointer">
+                <div className="flex items-center gap-3">
+                  <div className={cn(
+                    "w-2 h-2 rounded-full",
+                    page.status === 'Good' ? "bg-success" : page.status === 'Needs Improvement' ? "bg-warning" : "bg-critical"
+                  )} />
+                  <span className="text-sm font-bold text-primary group-hover:text-primary/70 transition-colors">{page.name}</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-32 h-1.5 bg-muted/10 rounded-full overflow-hidden hidden sm:block">
+                    <div 
+                      className={cn(
+                        "h-full transition-all duration-1000",
+                        page.score >= 90 ? "bg-success" : page.score >= 80 ? "bg-warning" : "bg-critical"
+                      )}
+                      style={{ width: `${page.score}%` }}
+                    />
+                  </div>
+                  <span className={cn("text-sm font-black w-8 text-right", getScoreColor(page.score))}>{page.score}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-primary text-surface rounded-2xl p-8 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 className="font-display font-bold text-xl mb-2">Performance Insights</h3>
+            <p className="text-sm text-surface/70 leading-relaxed">
+              Your <span className="font-bold text-surface">Search Results</span> page is currently the slowest critical route. Reducing the initial JS bundle size by 40KB would bring it into the "Good" range.
+            </p>
+          </div>
+          <button className="mt-6 flex items-center gap-2 text-xs font-black uppercase tracking-widest bg-white/10 hover:bg-white/20 transition-all py-3 px-6 rounded-xl self-start">
+            View Optimization Plan <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
       </section>
 

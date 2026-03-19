@@ -1,4 +1,11 @@
-import { Asset, Deployment, TrendData, CoreWebVital, LighthouseCategory, LighthouseAudit } from './types';
+import { Asset, Deployment, TrendData, CoreWebVital, LighthouseCategory, LighthouseAudit, PagePerformance } from './types';
+
+export const KEY_PAGES: PagePerformance[] = [
+  { id: 'home', name: 'Home', path: '/', score: 94, lcp: '1.1s', cls: 0.02, inp: '80ms', jsSize: '120KB', status: 'Good' },
+  { id: 'search', name: 'Search Results', path: '/search', score: 82, lcp: '2.4s', cls: 0.08, inp: '180ms', jsSize: '240KB', status: 'Needs Improvement' },
+  { id: 'article', name: 'Article Detail', path: '/article/:id', score: 88, lcp: '1.8s', cls: 0.04, inp: '120ms', jsSize: '180KB', status: 'Good' },
+  { id: 'contact', name: 'Contact Us', path: '/contact', score: 96, lcp: '0.9s', cls: 0.01, inp: '60ms', jsSize: '85KB', status: 'Good' },
+];
 
 export const LIGHTHOUSE_CATEGORIES: LighthouseCategory[] = [
   { id: 'performance', title: 'Performance', score: 0.92, description: 'Measures how quickly the page loads and becomes interactive.' },

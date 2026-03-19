@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, ShieldCheck, FolderTree, TrendingUp, Gauge, FileText } from 'lucide-react';
+import { LayoutDashboard, ShieldCheck, FolderTree, TrendingUp, Gauge, FileText, LayoutList } from 'lucide-react';
 import { Screen } from '../types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -16,6 +16,7 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ activeScreen, onScreenChange }) => {
   const navItems = [
     { id: 'overview' as Screen, label: 'Global Overview', icon: LayoutDashboard },
+    { id: 'pages' as Screen, label: 'Key Pages', icon: LayoutList },
     { id: 'vitals' as Screen, label: 'Core Web Vitals', icon: Gauge },
     { id: 'lighthouse' as Screen, label: 'Lighthouse Report', icon: FileText },
     { id: 'budget' as Screen, label: 'Budget Enforcer', icon: ShieldCheck },
